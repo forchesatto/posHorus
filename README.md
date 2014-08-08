@@ -43,5 +43,7 @@ Parte 1 - Introdução básica
 <a href="http://pt.slideshare.net/andreforchesatto/aula-parte-1-de-jsf-22" target="_blanck">Visualizar Slide</a>
 
 Parte 2 - Ciclo de vida e componentes ricos com Primefaces
+<a href="http://pt.slideshare.net/andreforchesatto/aula-parte-1-de-jsf-22-37785615" target="_blanck">Visualizar Slide</a>
+
 
 Parte 3 - Novas funcionalidades do JSF 2.2 com suporte a HTML 5 
