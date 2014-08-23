@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="titulo">${msg.tituloCliente}</ui:define>
+		<ui:define name="conteudo">
+			<h:form id="formCad" prexpendId="false">
+				<p:messages showDetail="true" showSummary="true" autoUpdate="true" />
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputText value="Cadastro de cliente" />
+					</f:facet>
+					<p:outputLabel value="${msg.codigo}" for="codigo" />
+					<h:panelGroup>
+						<p:inputText id="codigo"
+							value="#{clienteFormController.cliente.codigo}" />
+						<p:message for="codigo" />
+					</h:panelGroup>
+
+					<p:outputLabel value="Nome" for="nome" />
+					<h:panelGroup>
+						<p:inputText id="nome" value="#{clienteFormController.cliente.nome}" />
+						<p:message for="nome" />
+					</h:panelGroup>
+
+					<p:outputLabel value="CPF" for="cpf" />
+					<h:panelGroup>
+						<p:inputMask mask="999.999.999-99" id="cpf"
+							value="#{clienteFormController.cliente.cpf}" />
+						<p:message for="cpf" />
+					</h:panelGroup>
+
+					<p:outputLabel value="Data nascimento" for="dataNascimento" />
+					<p:calendar id="dataNascimento"
+						value="#{clienteFormController.cliente.dataNascimento}"
+						pattern="dd/MM/yyyy" mask="99/99/9999" />
+					<f:facet name="footer">
+						<p:commandButton value="${msg.salvar}" ajax="false"
+							action="#{clienteFormController.salvar}" 
+							icon="ui-icon-disk" />
+						<p:commandButton update="@form" value="Novo"
+							action="#{clienteFormController.novo}" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</ui:define>	
+	</ui:composition>
+</h:body>
+</html>

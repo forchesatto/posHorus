@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="titulo">Lista de pedidos</ui:define>
+		<ui:define name="conteudo">
+			<h:form id="formLista" prependId="false">
+				<h:panelGroup id="dados">
+					<p:dataTable value="#{pedidoFormController.pedidos}" var="pedido"
+						paginator="true" rows="2">
+						<p:column headerText="Código">
+							<h:outputText value="#{pedido.codigo}" />
+						</p:column>
+						<p:column headerText="Cliente">
+							<h:outputText value="#{pedido.cliente.nome}" />
+						</p:column>
+						<p:column headerText="Data emissao">
+							<h:outputText value="#{pedido.dataEmissao}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Valor">
+							<h:outputText value="#{pedido.valorTotal}">
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Opções">
+							<p:commandButton value="Remover"
+								action="#{pedidoFormController.remover(pedido)}"
+								update=":formLista:dados" />
+							<p:commandButton value="Editar" ajax="false"
+								action="#{pedidoFormController.editar(pedido)}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

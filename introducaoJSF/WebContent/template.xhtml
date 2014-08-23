@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+	<title><ui:insert name="titulo"/></title>
+</h:head>
+<h:body>
+	<p:layout>
+		<p:layoutUnit position="north">
+			Topo
+		</p:layoutUnit>
+		<p:layoutUnit position="west">
+			<h:form>
+				<p:menu>
+					<p:submenu label="Cadastros">
+						<p:menuitem value="Novo Cliente" 
+							ajax="false" 
+							action="#{clienteFormController.novo}" 
+							icon="ui-icon-disk" />
+						<p:menuitem value="Lista Cliente" 
+							outcome="/clienteLista"
+							icon="ui-icon-arrowrefresh-1-w" />
+					</p:submenu>
+					<p:submenu label="Pedido">
+						<p:menuitem value="Novo Pedido" 
+							ajax="false" 
+							action="#{pedidoFormController.novo}" 
+							icon="ui-icon-disk" />
+						<p:menuitem value="Lista Pedido" 
+							outcome="/pedidoLista"
+							icon="ui-icon-arrowrefresh-1-w" />
+					</p:submenu>
+				</p:menu>
+			</h:form>
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<ui:insert name="conteudo">Conteúdo padrão</ui:insert>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

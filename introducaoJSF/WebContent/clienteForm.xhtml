@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta charset="UTF-8" />
+<title>Cadastro de cliente</title>
+</h:head>
+<h:body>
+	<h:form id="formCad">
+		<h:messages 
+			showDetail="true" showSummary="true"/>
+		
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Código" for="codigo" />
+			<h:panelGroup>
+				<h:inputText id="codigo" 
+					value="#{clienteController.cliente.codigo}"/>
+				<h:message for="codigo"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Nome" for="nome" />
+			<h:panelGroup>
+				<h:inputText id="nome"
+					value="#{clienteController.cliente.nome}" />
+				<h:message for="nome"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="CPF" for="cpf"/>
+			<h:inputText id="cpf" value="#{clienteController.cliente.cpf}"/>
+			
+			<h:outputLabel value="Data nascimento" for="dataNascimento"/>
+			<h:inputText id="dataNascimento" 
+					value="#{clienteController.cliente.dataNascimento}">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:inputText>
+			
+			<h:commandButton value="Salvar" action="#{clienteController.salvar}">
+				<f:ajax execute="@form" render="formLista:dados"/>
+			</h:commandButton>
+			<h:commandButton value="Novo" action="#{clienteController.novo}">
+				<f:ajax execute="@this" render="@form"/>
+			</h:commandButton>
+		</h:panelGrid>
+	</h:form>
+	<h:form id="formLista">
+	<h:panelGroup id="dados">
+			<h:dataTable value="#{clienteController.clientes}" var="cliente">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Código"/>
+					</f:facet>
+					<h:outputText value="#{cliente.codigo}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"/>
+					</f:facet>
+					<h:outputText value="#{cliente.nome}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Data nascimento"/>
+					</f:facet>
+					<h:outputText value="#{cliente.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Opções"/>
+					</f:facet>
+					<h:commandButton value="Remover"
+						action="#{clienteController.remover(cliente)}">
+						<f:ajax execute="@this" render="formLista:dados"/>
+					</h:commandButton>
+						
+					<h:commandButton value="Editar"
+						action="#{clienteController.editar(cliente)}">
+						<f:ajax execute="@this" render="formCad"/>
+					</h:commandButton>	
+				</h:column>
+			</h:dataTable>
+		</h:panelGroup>
+	
+	</h:form>
+	
+</h:body>
+</html>

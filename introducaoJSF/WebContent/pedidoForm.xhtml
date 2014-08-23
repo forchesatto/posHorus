@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+</h:head>
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:define name="titulo">${msg.tituloPedido}</ui:define>
+		<ui:define name="conteudo">
+			<h:form id="formCad" prependId="false">
+				<p:messages showDetail="true" showSummary="true" autoUpdate="true" />
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:outputText value="${msg.tituloPedido}" />
+					</f:facet>
+					
+					<p:outputLabel value="Cliente" for="cliente" />
+					<h:panelGroup>
+						<p:autoComplete id="cliente" 
+							value="#{pedidoFormController.pedido.cliente}"
+							completeMethod="#{clienteFormController.autoComplete}" 
+							var="cliente" 
+							itemLabel="#{cliente.nome}" 
+							itemValue="#{cliente}"
+							converter="clienteConverter"/>
+						<p:message for="cliente" />
+					</h:panelGroup>
+					
+					<p:outputLabel value="Valor" for="valor"/>
+					<h:panelGroup>
+						<p:inputText id="valor" 
+							value="#{pedidoFormController.pedido.valorTotal}"/>
+						<p:message for="valor" />
+					</h:panelGroup> 
+					
+					<p:outputLabel value="Data emissão" for="dataEmissao" />
+					<p:calendar id="dataEmissao"
+						value="#{pedidoFormController.pedido.dataEmissao}"
+						pattern="dd/MM/yyyy" mask="99/99/9999" />
+					<f:facet name="footer">
+						<p:commandButton value="${msg.salvar}"
+							action="#{pedidoFormController.salvar}" 
+							ajax="false" 
+							icon="ui-icon-disk" />
+						<p:commandButton update="@form" value="Novo"
+							action="#{pedidoFormController.novo}" />
+					</f:facet>
+				</p:panelGrid>
+			</h:form>
+		</ui:define>	
+	</ui:composition>
+</h:body>
+</html>
